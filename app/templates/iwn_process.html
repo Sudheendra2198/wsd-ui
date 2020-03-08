@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    {% if gloss %}
+            <h3>Gloss of {{ selected_synset }} : </h3>
+            <div class="well add-margin">
+                <p class ="text">{{ gloss }}</p>
+            </div>
+            {% if hyponyms %}
+                <hr/>
+                <h3>Hyponymns of {{ selected_synset }}:</h3>
+                {% for hyponym in hyponyms %}
+                        <p class="well add-margin text">{{ hyponym }}</p>
+                {% endfor %}
+            {% endif %}
+    {% else %}
+        <h3>Synsets of {{ word }} :</h3>
+            {% for synset in synsets %}
+                <a href="/iwn_process/{{ synset }}">
+                    <div class="well add-margin">
+                        <p class="text">{{ synset }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+    {% endif %}
+    
+{% endblock %}
+
+

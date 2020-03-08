@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+
+    <div style="width:100%">
+        <form action="/wsd_process" method="POST">
+            <h3>Enter Input in English:</h3>
+            <input class="form-control text-input" size="180" name="sentence" type="text" placeholder="Enter text in english"/>
+        </form>
+    </div>
+    <div>
+        <h3>What will happen to the input? <small>That's what the image is for</small></h3>
+        <img src="static/images/flowchart.png" class="display-image"/>
+    </div>
+    
+{% endblock %}

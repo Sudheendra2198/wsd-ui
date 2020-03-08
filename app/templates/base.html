@@ -1,0 +1,87 @@
+{% include "bootstrap/base.html" %}
+
+
+{% block navbar %}
+    <head>
+        <link rel = "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+    </head>
+  <nav class="navbar navbar-default">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{ url_for('index') }}" style="color: black;font-size : x-large">WSD-తెలుగు</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            {% if title == 'home' %}
+                <ul class="nav navbar-nav active">
+                    <li style="font-size: large;"><a href="{{ url_for('index') }}">Home</a></li>
+                </ul> 
+            {% else %}
+                <ul class="nav navbar-nav">
+                    <li style="font-size: large;"><a href="{{ url_for('index') }}">Home</a></li>
+                </ul> 
+            {% endif %}
+
+            {% if title == 'disambiguate' %}
+                <ul class="nav navbar-nav active">
+                    <li style="font-size: large;"><a href="{{ url_for('login') }}">Disambiguate</a></li>
+                </ul>
+            {% else %}
+                <ul class="nav navbar-nav">
+                    <li style="font-size: large;"><a href="{{ url_for('login') }}">Disambiguate</a></li>
+                </ul>
+            {% endif %}
+
+            {% if title == 'iwn' %}
+                <ul class="nav navbar-nav active">
+                    <li style="font-size: large;"><a href="{{ url_for('iwn_index') }}">IndoWordNet</a></li>
+                </ul>
+            {% else %}
+                <ul class="nav navbar-nav">
+                    <li style="font-size: large;"><a href="{{ url_for('iwn_index') }}">IndoWordNet</a></li>
+                </ul>
+            {% endif %}
+            
+            
+        </div>
+    </div>
+    <div class="active" style="height:5px"></div>
+  </nav>
+  {% if title == 'iwn' %}
+        {% if page == 'synset' %}
+            <p class="text add-margin-large"><a href="/iwn_index">WordNet</a> > Synset</p>
+        {% endif %}
+        {% if page == 'gloss' %}
+            <p class="text add-margin-large"><a href="/iwn_index">WordNet</a> > <a href="/iwn_process/navbar">Synset</a> > Gloss & Hyponymns</p>
+        {% endif %}
+        
+  {% endif %}
+  
+  <div> </div>
+  
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-info" role="alert"><p class="text" >Input in English : <span style="font-weight:bold">{{ message }}</span></p></div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block app_content %}{% endblock %}
+    </div>
+{% endblock %}
+
+
+
+
+

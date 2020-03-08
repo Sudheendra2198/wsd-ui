@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <head>
+        <link rel = "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+    </head>
+    <div>
+        <h2>This is what happens:</h2>
+        <ul class="output-li">
+            <li >
+                <div>
+                    <h3>Translated Text : </h3>
+                    <p class="well output-text add-margin">{{ translated }}</p>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <h3>After removing stop-words : </h3>
+                    <p class="well output-text add-margin">{{ processed }}</p>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <h3>After stemming:</h3>
+                    <p class="well output-text add-margin"> {{ stemmed_words }}</p>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <h3>Disambiguated output:</h3>
+                    {% for word in output %}
+                    <p class="well output-text add-margin">{{ word }} ==> {{ output[word] }}</p>
+                    {% endfor %}
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+{% endblock %}

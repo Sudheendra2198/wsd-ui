@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+
+
+{% block app_content %}
+    <div>
+        <form action="/iwn_process/display" method="POST">
+            <div class="well">
+                <h2>Indo Word Net</h2>
+                <p class="text"> &nbsp;&nbsp;&nbsp;&nbsp;
+                    India is a multilingual country where machine translation and cross lingual search are highly relevant problems. These problems
+                    require large resources- like wordnets and lexicons- of high quality and coverage. Wordnets are lexical structures composed of synsets
+                    and semantic relations. Synsets are sets of synonyms.
+                    IndoWordnet is a linked structure of wordnets of major Indian languages from Indo-Aryan, Dravidian and
+                    Sino-Tibetan families.
+                </p>
+            </div>
+    
+            <div class="well">
+                <h2>pyiwn : </h2>
+                <p class="text"> &nbsp;&nbsp;&nbsp;&nbsp;
+                    A Python based API to access Indian language WordNets -- This API gives access to synsets, 
+                    glosses, examples, lexico-semantic relations between synsets, ontology nodes for 18 Indian languages, 
+                    
+                </p>
+            </div>
+            <hr/>
+            <div>
+                <h4>Enter word to search:</h4>
+                <input class="form-control text-input" size="180" name="word" type="text" placeholder="Enter word in english"/>
+            </div>
+            <br/>
+            <div class="form-group" style="width: 200px;">
+                <label for="lang">Select language:</label>
+                <select class="form-control" id="lang" name="language">
+                    {% for language in languages %}
+                        {% if language.name == 'TELUGU' %}
+                            <option value="{{ language }}" selected>{{ language.name.lower().capitalize() }}</option>
+                        {% else %}
+                        <option value="{{ language }}">{{ language.name.lower().capitalize() }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+    
+            <button type="submit" class="btn btn-success" >Explore WordNet</button>
+        </form>
+         
+    </div>
+    
+{% endblock %}

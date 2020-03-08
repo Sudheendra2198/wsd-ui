@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <head>
+        <link rel = "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+    </head>
+    <div class="well well-lg">
+        <h2 class="display-2">What is WSD you ask? <small>you came to the right place</small></h2>
+        <p class="text">&nbsp;&nbsp;&nbsp;&nbsp;
+                In computational linguistics, word-sense disambiguation (WSD) is an open 
+            problem concerned with identifying which sense of a word is used in a sentence.
+            The solution to this problem impacts other computer-related writing, such as discourse, 
+            improving relevance of search engines, anaphora resolution, coherence, and 
+            inference.
+        </p>
+    </div>
+
+    <div class="well well-lg">
+        <h2>Here's an example <small>because I know you didn't read the definition above!</small></h2>
+        <h4>Consider the sentences below:</h4>
+        <ul style="font-size: large;">
+            <li><em>I loved the <mark>bass</mark> sound in yesterday's concert.</em></li>
+            <li><em>He likes to eat grilled <mark>bass</mark>.</em></li>
+        </ul>
+        <p class="text">The word <em><mark>bass</mark></em> does not mean the same in both the sentences</p>
+        <p class="text">In the first sentence, it is referring to a type of sound/frequency</p>
+        <p class="text">In the secind sentence, <em><mark>bass</mark></em> mean a type of fish</p>
+        <p class="text">This process is referred to as <b>WORD SENSE DISAMBIGUATION</b></p>
+    </div>
+    <hr/>
+    <form action="/wsd_index" method="POST">
+        <blockquote class="blockquote text-center">
+            <p class="text">WSD-తెలుగు does the same, but for Telugu</p>
+            <button class="btn btn-success btn-lg" type="submit">Try it out</button>
+        </blockquote>
+    </form>
+    
+    
+
+{% endblock %}
+
