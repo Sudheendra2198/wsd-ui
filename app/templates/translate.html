@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block app_content %}
+    <div>
+        <form action="translate_process" method="POST">
+            <div class="well">
+                <h2>Translate Sentences:</h2>
+                <p class="text"> &nbsp;&nbsp;&nbsp;&nbsp;
+                    Before a sentence is given as an input to the disambiguator, it is first 
+                    translated into Telugu. If you notice that the results are not consistent, 
+                    you can try translating your sentences here. Also, you can translate into 
+                    other languages as well
+                </p>
+            </div>
+            <div>
+                <h4>Enter sentence to translate:</h4>
+                <input class="form-control text-input" size="180" name="sentence" type="text" placeholder="Enter sentence in english"/>
+            </div>
+            <br/>
+            <div class="form-group" style="width: 200px;">
+                <label for="lang">Select language:</label>
+                <select class="form-control" id="lang" name="language">
+                    {% for language in languages %}
+                        {% if language.name == 'TELUGU' %}
+                            <option value="{{ language }}" selected>{{ language.name.lower().capitalize() }}</option>
+                        {% else %}
+                        <option value="{{ language }}">{{ language.name.lower().capitalize() }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-success" >Translate sentence</button>
+        </form>
+
+            {% if translated %}
+                <form action="/wsd_process" method="POST"> 
+                    <h3>Translated Sentence:</h3>
+                    <div class="well">
+                        <p class="text">
+                            {{ translated_sentence }}
+                        </p>
+                    </div>
+                    <input type="hidden" name="sentence" value="{{ translated_sentence }}" />
+                    {% if selected_language == 'Language.TELUGU' %}
+                        <button type="submit" class="btn btn-success" >Disambiguate this sentence</button>
+                    {% endif %}
+                </form>
+                
+            {% endif %}
+              
+        
+    </div>
+
+{% endblock %}

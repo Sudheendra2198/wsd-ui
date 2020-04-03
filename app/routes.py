@@ -6,7 +6,6 @@ from app.disambiguator.get_best_sense import (
     translate_sentence,
     remove_stop_words,
     get_sense
-    
 )
 
 from app.disambiguator.utils import (
@@ -60,20 +59,7 @@ def wsd_process():
 @app.route('/iwn_index', methods=['GET', 'POST'])
 def iwn_index():
     page = 'wordnet'
-    languages = get_languages()
-    valid_languages = [ 'BENGALI',
-                        'GUJARATI',
-                        'HINDI',
-                        'KANNADA',
-                        'MALAYALAM',
-                        'MARATHI',
-                        'NEPALI',
-                        'PUNJABI',
-                        'TAMIL',
-                        'TELUGU',
-                        'URDU'
-                     ]
-    languages = filter(lambda language: language.name in valid_languages, languages)
+    languages = get_valid_languages()
     return render_template('iwn_index.html', title='iwn', languages = languages, page = page)
 
 @app.route('/iwn_process/<string:selected_synset>', methods=['GET', 'POST'])
@@ -117,4 +103,39 @@ def iwn_process(selected_synset):
                             translated_word = translated_word,
                             page = page
                         )
+                
+@app.route('/translate', methods = ['GET','POST'])
+def translate_index():
+    languages = get_valid_languages()
+    return render_template('translate.html', title='translate', languages = languages)
+
+@app.route('/translate_process', methods = ['GET','POST'])
+def translate_process():
+    languages = get_valid_languages()
+
+    language = request.form['language']
+    sentence = request.form['sentence']
+
+    translated_sentence = translate(sentence, language)
+
+    return render_template('translate.html', title = 'translate', languages = languages, translated_sentence = translated_sentence, translated = True, selected_language = language)
+
+
+
+def get_valid_languages():
+    languages = get_languages()
+    valid_languages = [ 'BENGALI',
+                        'GUJARATI',
+                        'HINDI',
+                        'KANNADA',
+                        'MALAYALAM',
+                        'MARATHI',
+                        'NEPALI',
+                        'PUNJABI',
+                        'TAMIL',
+                        'TELUGU',
+                        'URDU'
+                     ]
+    languages = filter(lambda language: language.name in valid_languages, languages)
+    return languages
 

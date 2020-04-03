@@ -46,6 +46,15 @@
                     <li style="font-size: large;"><a href="{{ url_for('iwn_index') }}">IndoWordNet</a></li>
                 </ul>
             {% endif %}
+            {% if title == 'translate' %}
+                <ul class="nav navbar-nav active">
+                    <li style="font-size: large;"><a href="{{ url_for('translate_index') }}">Translate</a></li>
+                </ul>
+            {% else %}
+                <ul class="nav navbar-nav">
+                    <li style="font-size: large;"><a href="{{ url_for('translate_index') }}">Translate</a></li>
+                </ul>
+            {% endif %}
             
             
         </div>
