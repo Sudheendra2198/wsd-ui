@@ -21,6 +21,7 @@ from app.disambiguator.utils import (
 synset_map = {}
 last_synsets = {}
 last_word = ""
+special_characters = [ '!', '@', '#' , '$', '%', '^', '&', '*', '(', ')', '{', '}', '\\', '|', ',', '.', '/', '<', '>', '?', ':', ';', '+', '-', '1', '2', '3', '4', '5', '6', '7', '8', '9' ,'0']
 
 @app.route('/')
 @app.route('/index')
@@ -43,8 +44,9 @@ def wsd_index():
 @app.route('/wsd_process', methods=['GET', 'POST'])
 def wsd_process():
     sentence = request.form['sentence']
+    sentence = ''.join((filter(lambda x: x not in special_characters, sentence)))
     flash(sentence)
-    translated = translate_sentence(sentence)
+    translated = translate_sentence(sentence.lower())
     sans_stop_words = remove_stop_words(translated)
     stemmed_words = stemmer(sans_stop_words)
     output = get_sense(stemmed_words)
